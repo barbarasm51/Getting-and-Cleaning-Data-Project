@@ -1,0 +1,99 @@
+Getting and Cleaning Data - Coursera
+This file describes the course project, due on Sunday, July 26, 2015
+
+The subject area of the project is described in this commentary:
+
+One of the most exciting areas in all of data science right now is wearable computing - see for example this article . Companies like Fitbit, Nike, and Jawbone Up are racing to develop the most advanced algorithms to attract new users. The data linked to from the course website represent data collected from the accelerometers from the Samsung Galaxy S smartphone. A full description is available at the site where the data was obtained: 
+
+http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones 
+
+Data for the project was downloaded from this site:
+
+https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip 
+
+The instructions given for the project were to do the following in an R script titled run_analysis.R:
+1. Merge the training and the test sets to create one data set.
+2. Extract only the measurements on the mean and standard deviation for each measurement.
+3. Use descriptive activity names to name the activities in the data set.
+4. Appropriately label the data set with descriptive variable names.
+5. From the data set created in step 4, create a second, independent tidy data set with the average
+        of each variable (named features in my solution) for each activity and each subject.
+
+The HAR UCI README document, excerpted below, was critical to understanding the organization of the data:
+
+The experiments have been carried out with a group of 30 volunteers within an age bracket of 19-48 years. 
+Each person performed six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) wearing a smartphone 
+(Samsung Galaxy S II) on the waist. Using its embedded accelerometer and gyroscope, we captured 3-axial linear acceleration and 3-axial 
+angular velocity at a constant rate of 50Hz. The experiments have been video-recorded to label the data manually. The obtained dataset 
+has been randomly partitioned into two sets, where 70% of the volunteers was selected for generating the training data and 30% the test data.
+...
+From each window, a vector of features was obtained by calculating variables from the time and frequency domain. See 'features_info.txt' 
+for more details. 
+...
+The dataset includes the following files:
+=========================================
+
+- 'README.txt'
+
+- 'features_info.txt': Shows information about the variables used on the feature vector.
+
+- 'features.txt': List of all features.
+
+- 'activity_labels.txt': Links the class labels with their activity name.
+
+- 'train/X_train.txt': Training set.
+
+- 'train/y_train.txt': Training labels.
+
+- 'test/X_test.txt': Test set.
+
+- 'test/y_test.txt': Test labels.
+
+The following files are available for the train and test data. Their descriptions are equivalent. 
+
+- 'train/subject_train.txt': Each row identifies the subject who performed the activity for each window sample. Its range is from 1 to 30. 
+
+THE FOLLOWING FILES WERE EXCLUDED FROM THE ANALYSIS FOR PURPOSES OF THIS PROJECT
+
+- 'train/Inertial Signals/total_acc_x_train.txt': The acceleration signal from the smartphone accelerometer X axis in standard gravity units 'g'. Every row shows a 128 element vector. The same description applies for the 'total_acc_x_train.txt' and 'total_acc_z_train.txt' files for the Y and Z axis. 
+
+- 'train/Inertial Signals/body_acc_x_train.txt': The body acceleration signal obtained by subtracting the gravity from the total acceleration. 
+
+- 'train/Inertial Signals/body_gyro_x_train.txt': The angular velocity vector measured by the gyroscope for each window sample. The units are radians/second. 
+
+Notes: 
+======
+- Features are normalized and bounded within [-1,1].
+- Each feature vector is a row on the text file.
+
+All of the files were downloaded manually and available locally for manipulation in R.
+
+___________________________________________________________________________________________________________________________________________
+The general methodology was to 
+0.  Load the dplyr and reshape libraries to work on data frames in R
+1.  Read in the features data set and organize as a vector
+2.  Use the features vector to identify and labbel the columns in the X_train and X_test files which contained no column headers or row names
+3.  Uses as motivation the note above ("Each feature vector is a row on the text file")
+4.  Assumed that each row in the X_train and X_test files, and later the Y_train and Y_test files, and subject_train and subject_test files 
+        corresponded to an ordered test or training event      
+5.  After reading the X_train and X_test files read in the activity_labels data, used to name the activity associated with each event
+6.  Y_train and Y_test files provided additional descriptive information for each event, namely an activity number
+7.  The original ordering of rows was captured (needed when combining with x data) and preserved in a column named "yevent.number"
+8.  The y files and activity names file were merged then sorted on  yevent number
+9.  Subject files were read, and, as with the x and y files, the original ordering of rows was captured and preserved
+10. A training dataset and test dataset were created by binding columns from subject files (Subject.Number), y files (Activity and Activity.Name)
+        and the wide xtrain and xtest files (with features as columns)
+11. The next steps reshaped the resulting training and test data sets, and set the column names to be as descriptive as possible.
+        I used the melt function and rename function to create these long, tidy data sets
+12. It was necessary to create unique numbering for the data set in which training and test events were combined. I used the mutate
+        function to create a new event.number field
+13.  An rbind command added the test set rows to the training set
+14.  The extraction of only measurements on the mean and standard deviation was accomplished with this statement in R:
+        subcombodata=combodata[grep("mean|std",combodata$feature),]
+15.  The final tidyoutput file was created using the summarize function with Mean on measurement (measurement was the name I used rather
+        than the generic "value"), with a group_by command on activity.name, subject.number and feature (feature was the name I used rather
+        than the generic "variable")
+
+
+
+
