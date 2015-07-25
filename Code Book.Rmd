@@ -1,0 +1,32 @@
+---
+title: "Code Book"
+author: "B Mahoney"
+date: "July 25, 2015"
+output: html_document
+---
+
+Getting and Cleaning Data - Coursera
+This file is the Code Book for the project, due on Sunday, July 26, 2015
+
+The data linked to from the course website represent data collected from the accelerometers from the Samsung Galaxy S smartphone, part of 
+experiments conducted by UCI on Human Activity Recognition using smartphones.  Below is an excerpt from the README.txt file supplied along
+with the data.
+_____________________________________________________________________________________________________________________________________________
+The experiments were carried out with a group of 30 volunteers within an age bracket of 19-48 years. Each person performed six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) wearing a smartphone (Samsung Galaxy S II) on the waist. Using its embedded accelerometer and gyroscope, we captured 3-axial linear acceleration and 3-axial angular velocity at a constant rate of 50Hz. The experiments have been video-recorded to label the data manually. The obtained dataset has been randomly partitioned into two sets, where 70% of the volunteers was selected for generating the training data and 30% the test data. 
+
+The sensor signals (accelerometer and gyroscope) were pre-processed by applying noise filters and then sampled in fixed-width sliding windows of 2.56 sec and 50% overlap (128 readings/window). The sensor acceleration signal, which has gravitational and body motion components, was separated using a Butterworth low-pass filter into body acceleration and gravity. The gravitational force is assumed to have only low frequency components, therefore a filter with 0.3 Hz cutoff frequency was used. From each window, a vector of features was obtained by calculating variables from the time and frequency domain. See 'features_info.txt' for more details. 
+_____________________________________________________________________________________________________________________________________________
+Raw data:
+Subjects - an integer from 1 to 30, identifying which volunteer performed a specified activity wearing a smartphone.
+Activity Numbers - an integer from 1 to 6, identifying a specified activity
+Activity Names - a character string from the list (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING)
+Features - a set of 561 character string variables calculated from the time and frequency domain.  
+Values - numeric measurements on features, normalized and bounded within [-1,1]
+
+The tidyoutput file is a subset of the raw data, with the feature set limited to those string variables with "mean" or "std"
+
+Processed data:
+activity.name - factor with 6 levels: WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING
+subject.number - integer, identifying the volunteer who performed the specified activity
+feature - factor with 79 levels, complete list found in selfeatures.txt
+mean.measurement - number between -1 and 1 equal to the average of the measurement for each grouping of activity, subject and feature
