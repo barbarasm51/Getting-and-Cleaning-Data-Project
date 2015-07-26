@@ -23,7 +23,8 @@ Activity Names - a character string from the list (WALKING, WALKING_UPSTAIRS, WA
 Features - a set of 561 character string variables calculated from the time and frequency domain.  
 Values - numeric measurements on features, normalized and bounded within [-1,1].
 
-The tidyoutput file is a subset of the raw data, with the feature set limited to those string variables with "mean" or "std"
+The tidyoutput file is a subset of the raw data, with the feature set limited to those feature variables for which "mean" or "std"
+occurs in the name.
 
 Processed data:
 activity.name - factor with 6 levels: WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING.
