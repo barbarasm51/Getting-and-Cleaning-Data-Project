@@ -18,15 +18,15 @@ The sensor signals (accelerometer and gyroscope) were pre-processed by applying 
 _____________________________________________________________________________________________________________________________________________
 Raw data:
 Subjects - an integer from 1 to 30, identifying which volunteer performed a specified activity wearing a smartphone.
-Activity Numbers - an integer from 1 to 6, identifying a specified activity
-Activity Names - a character string from the list (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING)
+Activity Numbers - an integer from 1 to 6, identifying a specified activity.
+Activity Names - a character string from the list (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING).
 Features - a set of 561 character string variables calculated from the time and frequency domain.  
-Values - numeric measurements on features, normalized and bounded within [-1,1]
+Values - numeric measurements on features, normalized and bounded within [-1,1].
 
 The tidyoutput file is a subset of the raw data, with the feature set limited to those string variables with "mean" or "std"
 
 Processed data:
-activity.name - factor with 6 levels: WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING
-subject.number - integer, identifying the volunteer who performed the specified activity
-feature - factor with 79 levels, complete list found in selfeatures.txt
-mean.measurement - number between -1 and 1 equal to the average of the measurement for each grouping of activity, subject and feature
+activity.name - factor with 6 levels: WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING.
+subject.number - integer, identifying the volunteer who performed the specified activity.
+feature - factor with 79 levels, complete list found in selfeatures.txt.
+mean.measurement - number between -1 and 1 equal to the average of the measurement for each grouping of activity, subject and feature.

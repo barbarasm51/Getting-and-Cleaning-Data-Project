@@ -71,29 +71,28 @@ All of the files were downloaded manually and available locally for manipulation
 
 ___________________________________________________________________________________________________________________________________________
 The general methodology was to 
-0.  Load the dplyr and reshape libraries to work on data frames in R
-1.  Read in the features data set and organize as a vector
-2.  Use the features vector to identify and labbel the columns in the X_train and X_test files which contained no column headers or row names
-3.  Uses as motivation the note above ("Each feature vector is a row on the text file")
+0.  Load the dplyr and reshape libraries to work on data frames in R.  
+1.  Read in the features data set and organize as a vector.  
+2.  Use the features vector to identify and labbel the columns in the X_train and X_test files which contained no column headers or row names.  
+3.  Uses as motivation the note above ("Each feature vector is a row on the text file").  
 4.  Assumed that each row in the X_train and X_test files, and later the Y_train and Y_test files, and subject_train and subject_test files 
-        corresponded to an ordered test or training event      
-5.  After reading the X_train and X_test files read in the activity_labels data, used to name the activity associated with each event
-6.  Y_train and Y_test files provided additional descriptive information for each event, namely an activity number
+        corresponded to an ordered test or training event.        
+5.  After reading the X_train and X_test files read in the activity_labels data, used to name the activity associated with each event.
+6.  Y_train and Y_test files provided additional descriptive information for each event, namely an activity number.
 7.  The original ordering of rows was captured (needed when combining with x data) and preserved in a column named "yevent.number"
-8.  The y files and activity names file were merged then sorted on  yevent number
-9.  Subject files were read, and, as with the x and y files, the original ordering of rows was captured and preserved
-10. A training dataset and test dataset were created by binding columns from subject files (Subject.Number), y files (Activity and Activity.Name)
-        and the wide xtrain and xtest files (with features as columns)
+8.  The y files and activity names file were merged then sorted on  yevent number.
+9.  Subject files were read, and, as with the x and y files, the original ordering of rows was captured and preserved.
+10. A training dataset and test dataset were created by binding columns from subject files (Subject.Number), y files (Activity and Activity                .Name) and the wide xtrain and xtest files (with features as columns)
 11. The next steps reshaped the resulting training and test data sets, and set the column names to be as descriptive as possible.
-        I used the melt function and rename function to create these long, tidy data sets
+        I used the melt function and rename function to create these long, tidy data sets.
 12. It was necessary to create unique numbering for the data set in which training and test events were combined. I used the mutate
-        function to create a new event.number field
-13.  An rbind command added the test set rows to the training set
+        function to create a new event.number field.
+13.  An rbind command added the test set rows to the training set.
 14.  The extraction of only measurements on the mean and standard deviation was accomplished with this statement in R:
-        subcombodata=combodata[grep("mean|std",combodata$feature),]
+        subcombodata=combodata[grep("mean|std",combodata$feature),].
 15.  The final tidyoutput file was created using the summarize function with Mean on measurement (measurement was the name I used rather
         than the generic "value"), with a group_by command on activity.name, subject.number and feature (feature was the name I used rather
-        than the generic "variable")
+        than the generic "variable").
 16.  I wrote the tidyoutput to a text file for upload to the project submission site.
 17.  Please note that tidyoutput is a tidy, long data set having the following fields:
         activity.name, subject.number, feature, mean.measurement
